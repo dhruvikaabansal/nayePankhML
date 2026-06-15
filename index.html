@@ -77,9 +77,11 @@
   .preset-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
   .warning-box{background:#fff8f0;border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:16px;color:#7a531e}
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .grid-span-2{grid-column:span 2}
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}
     .steps,.grid3,.grid4{grid-template-columns:1fr !important}.hero h1{font-size:27px}.twocol{columns:1}
+    .grid-span-2{grid-column:span 1 !important}
   }
 </style>
 </head>
@@ -194,23 +196,67 @@
       <h2>Recommended Actions</h2>
       <p class="lead">High-priority targets automatically identified based on your current focus and filters.</p>
     </div>
+    
     <div class="grid2" style="margin-bottom: 24px;">
+      <!-- Absolute Top Targets -->
       <div class="card" style="border-left: 4px solid var(--high);">
-        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px;">🚨 Highest Need District</h3>
-        <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
-          <span id="recNeedName" style="font-size: 19px; font-weight: 700; font-family: Poppins;">-</span>
-          <span class="pill High" id="recNeedTier">-</span>
+        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px;">🚨 Absolute Top Targets</h3>
+        <div style="margin-bottom: 14px;">
+          <strong style="font-size: 11.5px; color: var(--muted); display: block; text-transform: uppercase; letter-spacing: 0.02em;">Highest Need District:</strong>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0 4px;">
+            <span id="recNeedName" style="font-size: 16px; font-weight: 700; font-family: Poppins;">-</span>
+            <span class="pill High" id="recNeedTier">-</span>
+          </div>
+          <p class="note" style="margin: 0; font-size: 12px; line-height: 1.4;">Need Index: <b id="recNeedIndex">-</b> · <span id="recNeedReason">-</span></p>
         </div>
-        <div style="font-size: 13px; margin: 4px 0 8px;">Need Index: <b id="recNeedIndex">-</b></div>
-        <p class="note" id="recNeedReason" style="margin: 0; line-height: 1.45; font-size: 12.5px;">-</p>
+        <div>
+          <strong style="font-size: 11.5px; color: var(--muted); display: block; text-transform: uppercase; letter-spacing: 0.02em;">Menstrual Hygiene Opportunity (Awareness Gap):</strong>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0 4px;">
+            <span id="recGapName" style="font-size: 16px; font-weight: 700; font-family: Poppins;">-</span>
+            <span id="recGapValue" style="font-weight: 700; color: var(--high); font-size: 13.5px;">-</span>
+          </div>
+          <p class="note" id="recGapReason" style="margin: 0; line-height: 1.4; font-size: 12px;">-</p>
+        </div>
       </div>
-      <div class="card" style="border-left: 4px solid var(--amber);">
-        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px;">🩸 Biggest Menstrual Hygiene Opportunity</h3>
-        <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
-          <span id="recGapName" style="font-size: 19px; font-weight: 700; font-family: Poppins;">-</span>
+
+      <!-- Top District by Operational Tier -->
+      <div class="card" style="border-left: 4px solid var(--teal);">
+        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px;">🎯 Top District by Operational Tier</h3>
+        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
+            <span><span class="pill High" style="margin-right: 6px; padding: 1px 6px; font-size: 10.5px;">High</span> <span id="tierTopHighName">-</span></span>
+            <strong id="tierTopHighVal" class="note" style="font-size:12px; color:var(--ink)">-</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
+            <span><span class="pill Medium" style="margin-right: 6px; padding: 1px 6px; font-size: 10.5px;">Medium</span> <span id="tierTopMedName">-</span></span>
+            <strong id="tierTopMedVal" class="note" style="font-size:12px; color:var(--ink)">-</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding-bottom: 2px;">
+            <span><span class="pill Lower" style="margin-right: 6px; padding: 1px 6px; font-size: 10.5px;">Lower</span> <span id="tierTopLowName">-</span></span>
+            <strong id="tierTopLowVal" class="note" style="font-size:12px; color:var(--ink)">-</strong>
+          </div>
         </div>
-        <div style="font-size: 13px; margin: 4px 0 8px;">Awareness Gap: <b id="recGapValue" style="color: var(--high);">-</b></div>
-        <p class="note" id="recGapReason" style="margin: 0; line-height: 1.45; font-size: 12.5px;">-</p>
+      </div>
+    </div>
+
+    <!-- State Level Prioritization -->
+    <div class="grid2" style="margin-bottom: 24px; margin-top: -8px;">
+      <div class="card grid-span-2" style="border-left: 4px solid var(--med);">
+        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px;">🗺️ State Need Rankings (By Campaign Focus)</h3>
+        <div class="grid3" style="margin-top: 6px; gap: 16px;">
+          <div>
+            <strong style="color: var(--high); font-size: 12px; display: block; border-bottom: 2px solid var(--high); padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em;">🚨 High Need States</strong>
+            <div id="stateListHigh" style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">-</div>
+          </div>
+          <div>
+            <strong style="color: var(--amber); font-size: 12px; display: block; border-bottom: 2px solid var(--amber); padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em;">⚠️ Medium Need States</strong>
+            <div id="stateListMed" style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">-</div>
+          </div>
+          <div>
+            <strong style="color: var(--low); font-size: 12px; display: block; border-bottom: 2px solid var(--low); padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em;">✅ Lower Need States</strong>
+            <div id="stateListLow" style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">-</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -400,6 +446,15 @@ function updateRecommended(rows) {
     document.getElementById("recGapName").textContent = "-";
     document.getElementById("recGapValue").textContent = "-";
     document.getElementById("recGapReason").textContent = "No data available.";
+    document.getElementById("tierTopHighName").textContent = "-";
+    document.getElementById("tierTopHighVal").textContent = "-";
+    document.getElementById("tierTopMedName").textContent = "-";
+    document.getElementById("tierTopMedVal").textContent = "-";
+    document.getElementById("tierTopLowName").textContent = "-";
+    document.getElementById("tierTopLowVal").textContent = "-";
+    document.getElementById("stateListHigh").innerHTML = "-";
+    document.getElementById("stateListMed").innerHTML = "-";
+    document.getElementById("stateListLow").innerHTML = "-";
     return;
   }
   
@@ -421,6 +476,83 @@ function updateRecommended(rows) {
   document.getElementById("recGapValue").textContent = topOpp.residual.toFixed(1);
   document.getElementById("recGapReason").textContent = 
     `Menstrual hygiene use (${topOpp.menstrual_hygiene}%) is significantly lower than predicted (${topOpp.predicted_menstrual}%) based on socio-economic indicators.`;
+
+  // 3. Highest Need by Tier
+  const highTierRows = rows.filter(d => TIERKEY(d.tier) === "High");
+  const medTierRows = rows.filter(d => TIERKEY(d.tier) === "Medium");
+  const lowTierRows = rows.filter(d => TIERKEY(d.tier) === "Lower");
+
+  if (highTierRows.length > 0) {
+    document.getElementById("tierTopHighName").textContent = `${highTierRows[0].district} (${highTierRows[0].state})`;
+    document.getElementById("tierTopHighVal").textContent = `Need: ${highTierRows[0].liveNeed.toFixed(1)}`;
+  } else {
+    document.getElementById("tierTopHighName").textContent = "N/A";
+    document.getElementById("tierTopHighVal").textContent = "-";
+  }
+
+  if (medTierRows.length > 0) {
+    document.getElementById("tierTopMedName").textContent = `${medTierRows[0].district} (${medTierRows[0].state})`;
+    document.getElementById("tierTopMedVal").textContent = `Need: ${medTierRows[0].liveNeed.toFixed(1)}`;
+  } else {
+    document.getElementById("tierTopMedName").textContent = "N/A";
+    document.getElementById("tierTopMedVal").textContent = "-";
+  }
+
+  if (lowTierRows.length > 0) {
+    document.getElementById("tierTopLowName").textContent = `${lowTierRows[0].district} (${lowTierRows[0].state})`;
+    document.getElementById("tierTopLowVal").textContent = `Need: ${lowTierRows[0].liveNeed.toFixed(1)}`;
+  } else {
+    document.getElementById("tierTopLowName").textContent = "N/A";
+    document.getElementById("tierTopLowVal").textContent = "-";
+  }
+
+  // 4. State Need Rankings
+  const stateNeeds = {};
+  rows.forEach(d => {
+    if (!stateNeeds[d.state]) {
+      stateNeeds[d.state] = { sum: 0, count: 0 };
+    }
+    stateNeeds[d.state].sum += d.liveNeed;
+    stateNeeds[d.state].count++;
+  });
+
+  const stateList = Object.entries(stateNeeds).map(([name, data]) => ({
+    name: name,
+    avg: data.sum / data.count
+  })).sort((a, b) => b.avg - a.avg);
+
+  const highStates = [];
+  const medStates = [];
+  const lowStates = [];
+
+  stateList.forEach(s => {
+    if (s.avg >= 55) {
+      highStates.push(s);
+    } else if (s.avg >= 35) {
+      medStates.push(s);
+    } else {
+      lowStates.push(s);
+    }
+  });
+
+  const renderStateItem = s => `
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px dashed var(--line); padding: 3px 0;">
+      <span><b>${s.name}</b></span>
+      <span class="note" style="font-weight:600; color:var(--ink)">Avg: ${s.avg.toFixed(1)}</span>
+    </div>
+  `;
+
+  document.getElementById("stateListHigh").innerHTML = highStates.length > 0 
+    ? highStates.map(renderStateItem).join("") 
+    : `<div style="color:var(--muted); font-style:italic; font-size:12px;">No states in this tier</div>`;
+
+  document.getElementById("stateListMed").innerHTML = medStates.length > 0 
+    ? medStates.map(renderStateItem).join("") 
+    : `<div style="color:var(--muted); font-style:italic; font-size:12px;">No states in this tier</div>`;
+
+  document.getElementById("stateListLow").innerHTML = lowStates.length > 0 
+    ? lowStates.map(renderStateItem).join("") 
+    : `<div style="color:var(--muted); font-style:italic; font-size:12px;">No states in this tier</div>`;
 }
 
 /* ---------- sliders ---------- */
