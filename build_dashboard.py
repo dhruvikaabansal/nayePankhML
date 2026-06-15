@@ -82,11 +82,11 @@ HTML = r"""<!DOCTYPE html>
   .preset-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
   .warning-box{background:#fff8f0;border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:16px;color:#7a531e}
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .grid-span-2{grid-column:span 2}
+  .guide-col{border-right:1px solid var(--line);padding-right:16px}
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}
     .steps,.grid3,.grid4{grid-template-columns:1fr !important}.hero h1{font-size:27px}.twocol{columns:1}
-    .grid-span-2{grid-column:span 1 !important}
+    .guide-col{border-right:none !important;padding-right:0 !important;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:16px}
   }
 </style>
 </head>
@@ -195,71 +195,73 @@ HTML = r"""<!DOCTYPE html>
       Campaign-specific weights should only be used when planning a focused intervention such as menstrual hygiene, education, nutrition, or sanitation drives.
     </div>
 
-    <!-- Recommended Actions section -->
-    <div style="margin-top: 36px; margin-bottom: 12px;">
-      <div class="eyebrow">Decision Guidance</div>
-      <h2>Recommended Actions</h2>
-      <p class="lead">High-priority targets automatically identified based on your current focus and filters.</p>
-    </div>
-    
-    <div class="grid2" style="margin-bottom: 24px;">
-      <!-- Absolute Top Targets -->
-      <div class="card" style="border-left: 4px solid var(--high);">
-        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px;">🚨 Absolute Top Targets</h3>
-        <div style="margin-bottom: 14px;">
-          <strong style="font-size: 11.5px; color: var(--muted); display: block; text-transform: uppercase; letter-spacing: 0.02em;">Highest Need District:</strong>
-          <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0 4px;">
-            <span id="recNeedName" style="font-size: 16px; font-weight: 700; font-family: Poppins;">-</span>
-            <span class="pill High" id="recNeedTier">-</span>
-          </div>
-          <p class="note" style="margin: 0; font-size: 12px; line-height: 1.4;">Need Index: <b id="recNeedIndex">-</b> · <span id="recNeedReason">-</span></p>
-        </div>
+    <!-- Recommended Actions card -->
+    <div class="card" style="margin-top: 24px; border-top: 4px solid var(--teal);">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 20px;">
         <div>
-          <strong style="font-size: 11.5px; color: var(--muted); display: block; text-transform: uppercase; letter-spacing: 0.02em;">Menstrual Hygiene Opportunity (Awareness Gap):</strong>
-          <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0 4px;">
-            <span id="recGapName" style="font-size: 16px; font-weight: 700; font-family: Poppins;">-</span>
-            <span id="recGapValue" style="font-weight: 700; color: var(--high); font-size: 13.5px;">-</span>
-          </div>
-          <p class="note" id="recGapReason" style="margin: 0; line-height: 1.4; font-size: 12px;">-</p>
+          <span class="eyebrow" style="font-size: 11px;">Decision Guidance</span>
+          <h3 style="font-size: 18px; font-family: Poppins; font-weight: 700; margin-top: 2px;">Recommended Actions</h3>
         </div>
+        <span class="note" style="font-size: 12px;">Updated dynamically based on focus</span>
       </div>
-
-      <!-- Top District by Operational Tier -->
-      <div class="card" style="border-left: 4px solid var(--teal);">
-        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px;">🎯 Top District by Operational Tier</h3>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
-            <span><span class="pill High" style="margin-right: 6px; padding: 1px 6px; font-size: 10.5px;">High</span> <span id="tierTopHighName">-</span></span>
-            <strong id="tierTopHighVal" class="note" style="font-size:12px; color:var(--ink)">-</strong>
+      
+      <div class="grid3" style="gap: 20px;">
+        <!-- Column 1: Absolute Top Targets -->
+        <div class="guide-col">
+          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">🚨 Top Targets</h4>
+          <div style="margin-bottom: 14px;">
+            <strong style="font-size: 11px; color: var(--muted); display: block; margin-bottom: 2px;">Highest Need District:</strong>
+            <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0;">
+              <span id="recNeedName" style="font-size: 15px; font-weight: 700; font-family: Poppins;">-</span>
+              <span class="pill High" id="recNeedTier" style="font-size: 10px; padding: 1px 5px;">-</span>
+            </div>
+            <p class="note" style="margin: 0; font-size: 11.5px; line-height: 1.45;">Need: <b id="recNeedIndex">-</b> · <span id="recNeedReason">-</span></p>
           </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
-            <span><span class="pill Medium" style="margin-right: 6px; padding: 1px 6px; font-size: 10.5px;">Medium</span> <span id="tierTopMedName">-</span></span>
-            <strong id="tierTopMedVal" class="note" style="font-size:12px; color:var(--ink)">-</strong>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; padding-bottom: 2px;">
-            <span><span class="pill Lower" style="margin-right: 6px; padding: 1px 6px; font-size: 10.5px;">Lower</span> <span id="tierTopLowName">-</span></span>
-            <strong id="tierTopLowVal" class="note" style="font-size:12px; color:var(--ink)">-</strong>
+          <div>
+            <strong style="font-size: 11px; color: var(--muted); display: block; margin-bottom: 2px;">Menstrual Hygiene Opportunity:</strong>
+            <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0;">
+              <span id="recGapName" style="font-size: 15px; font-weight: 700; font-family: Poppins;">-</span>
+              <span id="recGapValue" style="font-weight: 700; color: var(--high); font-size: 12.5px;">-</span>
+            </div>
+            <p class="note" id="recGapReason" style="margin: 0; line-height: 1.45; font-size: 11.5px;">-</p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- State Level Prioritization -->
-    <div class="grid2" style="margin-bottom: 24px; margin-top: -8px;">
-      <div class="card grid-span-2" style="border-left: 4px solid var(--med);">
-        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 12px;">🗺️ State Need Rankings (By Campaign Focus)</h3>
-        <div class="grid3" style="margin-top: 6px; gap: 16px;">
-          <div>
-            <strong style="color: var(--high); font-size: 12px; display: block; border-bottom: 2px solid var(--high); padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em;">🚨 High Need States</strong>
-            <div id="stateListHigh" style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">-</div>
+        <!-- Column 2: Top by Operational Tier -->
+        <div class="guide-col">
+          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">🎯 Top by Operational Tier</h4>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
+              <span><span class="pill High" style="margin-right: 6px; padding: 1px 6px; font-size: 10px;">High</span> <span id="tierTopHighName">-</span></span>
+              <strong id="tierTopHighVal" class="note" style="font-size:11.5px; color:var(--ink)">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
+              <span><span class="pill Medium" style="margin-right: 6px; padding: 1px 6px; font-size: 10px;">Medium</span> <span id="tierTopMedName">-</span></span>
+              <strong id="tierTopMedVal" class="note" style="font-size:11.5px; color:var(--ink)">-</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; padding-bottom: 2px;">
+              <span><span class="pill Lower" style="margin-right: 6px; padding: 1px 6px; font-size: 10px;">Lower</span> <span id="tierTopLowName">-</span></span>
+              <strong id="tierTopLowVal" class="note" style="font-size:11.5px; color:var(--ink)">-</strong>
+            </div>
           </div>
-          <div>
-            <strong style="color: var(--amber); font-size: 12px; display: block; border-bottom: 2px solid var(--amber); padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em;">⚠️ Medium Need States</strong>
-            <div id="stateListMed" style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">-</div>
-          </div>
-          <div>
-            <strong style="color: var(--low); font-size: 12px; display: block; border-bottom: 2px solid var(--low); padding-bottom: 4px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.02em;">✅ Lower Need States</strong>
-            <div id="stateListLow" style="display: flex; flex-direction: column; gap: 6px; font-size: 12.5px;">-</div>
+        </div>
+
+        <!-- Column 3: State Need Rankings -->
+        <div>
+          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">🗺️ State Need Rankings</h4>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div>
+              <strong style="color: var(--high); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px;">🚨 High Need</strong>
+              <div id="stateListHigh" style="display: flex; flex-direction: column; gap: 3px; font-size: 11.5px;">-</div>
+            </div>
+            <div>
+              <strong style="color: var(--amber); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; margin-top: 2px;">⚠️ Medium Need</strong>
+              <div id="stateListMed" style="display: flex; flex-direction: column; gap: 3px; font-size: 11.5px;">-</div>
+            </div>
+            <div>
+              <strong style="color: var(--low); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; margin-top: 2px;">✅ Lower Need</strong>
+              <div id="stateListLow" style="display: flex; flex-direction: column; gap: 3px; font-size: 11.5px;">-</div>
+            </div>
           </div>
         </div>
       </div>
