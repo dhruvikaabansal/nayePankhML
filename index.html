@@ -11,7 +11,7 @@
   :root{
     --teal:#0d8a72; --teal-d:#0a5f50; --amber:#f2a23c;
     --high:#e0564f; --med:#eaa53d; --low:#2fa37a;
-    --ink:#13302b; --muted:#5d726c; --line:#e3ebe8; --bg:#f4f8f6; --card:#ffffff;
+    --ink:#13302b; --muted:#5d726c; --line:#d8e2df; --bg:#f9fafb; --card:#ffffff;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.55}
@@ -19,63 +19,63 @@
   a{color:var(--teal-d)}
   .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
   /* header */
-  header{background:linear-gradient(135deg,var(--teal-d),var(--teal));color:#fff;padding:30px 0 90px}
+  header{background:#123c34;color:#fff;padding:30px 0 90px}
   .nav{display:flex;align-items:center;gap:12px}
-  .logo{width:38px;height:38px;border-radius:9px;background:#fff;display:grid;place-items:center;color:var(--teal-d);font-weight:700;font-family:Poppins}
+  .logo{width:38px;height:38px;border-radius:4px;background:#fff;display:grid;place-items:center;color:var(--teal-d);font-weight:700;font-family:Poppins}
   .brand{font-size:19px;font-weight:600;color:#fff}
   .brand small{display:block;font-size:11px;font-weight:400;opacity:.85;letter-spacing:.04em;font-family:Inter}
   .hero{margin-top:34px;max-width:760px}
-  .tagchip{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.25);
-           padding:5px 12px;border-radius:30px;font-size:12.5px;font-weight:500;margin-bottom:14px}
-  .hero h1{font-size:34px;line-height:1.18;font-weight:700}
-  .hero p{font-size:16.5px;opacity:.94;margin-top:12px}
+  .tagchip{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+           padding:4px 10px;border-radius:4px;font-size:12px;font-weight:500;margin-bottom:14px}
+  .hero h1{font-size:32px;line-height:1.18;font-weight:700}
+  .hero p{font-size:16px;opacity:.94;margin-top:12px}
   /* kpi cards */
   .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:-62px}
-  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 6px 20px rgba(13,80,66,.06)}
-  .kpi .v{font-family:Poppins;font-size:26px;font-weight:700;color:var(--teal-d)}
-  .kpi .l{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+  .kpi .v{font-family:Poppins;font-size:24px;font-weight:700;color:var(--teal-d)}
+  .kpi .l{font-size:12px;color:var(--muted);margin-top:3px}
   /* sections */
   section{margin:46px 0}
-  .eyebrow{color:var(--teal);font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase}
-  h2{font-size:24px;margin:6px 0 4px}
-  .lead{color:var(--muted);font-size:15px;max-width:760px}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 4px 16px rgba(13,80,66,.05)}
+  .eyebrow{color:var(--teal);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+  h2{font-size:22px;margin:6px 0 4px}
+  .lead{color:var(--muted);font-size:14.5px;max-width:760px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:22px}
   .grid2{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-  .step .n{width:30px;height:30px;border-radius:8px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-family:Poppins;margin-bottom:10px}
-  .step h3{font-size:15.5px} .step p{font-size:13.5px;color:var(--muted);margin:6px 0 0}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px}
+  .step .n{width:28px;height:28px;border-radius:4px;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:700;font-family:Poppins;margin-bottom:10px}
+  .step h3{font-size:15px} .step p{font-size:13px;color:var(--muted);margin:6px 0 0}
   /* controls */
   .controls{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
   .slider{flex:1;min-width:150px}
   .slider label{font-size:12.5px;font-weight:600;display:flex;justify-content:space-between}
   .slider input{width:100%;accent-color:var(--teal)}
   .formula{font-size:12.5px;color:var(--muted);margin-top:10px}
-  select{padding:8px 10px;border:1px solid var(--line);border-radius:9px;font-family:Inter;font-size:13.5px;background:#fff}
-  .btn{background:var(--teal);color:#fff;border:0;padding:8px 14px;border-radius:9px;font-weight:600;cursor:pointer;font-family:Inter}
+  select{padding:8px 10px;border:1px solid var(--line);border-radius:4px;font-family:Inter;font-size:13px;background:#fff}
+  .btn{background:var(--teal);color:#fff;border:0;padding:8px 14px;border-radius:4px;font-weight:600;cursor:pointer;font-family:Inter}
   /* table */
   table{width:100%;border-collapse:collapse;font-size:13.5px}
   th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--line)}
   th{font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);cursor:pointer;user-select:none;white-space:nowrap}
   td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
   tr:hover td{background:#f7faf9}
-  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:11.5px;font-weight:600;color:#fff}
+  .pill{display:inline-block;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:600;color:#fff}
   .pill.High{background:var(--high)} .pill.Medium{background:var(--med)} .pill.Lower{background:var(--low)}
   .bar{height:7px;border-radius:5px;background:linear-gradient(90deg,var(--low),var(--med),var(--high));position:relative}
   .gap-neg{color:var(--high);font-weight:600} .gap-pos{color:var(--low);font-weight:600}
   .chartbox{position:relative;height:300px}
   .note{font-size:12.5px;color:var(--muted)}
-  .tablewrap{max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+  .tablewrap{max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:6px}
   .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;margin-top:8px}
   .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
   footer{background:var(--ink);color:#cfe0db;padding:26px 0;margin-top:50px;font-size:13px}
   footer a{color:#9fe0cf}
   .twocol{columns:2;column-gap:26px}
-  .preset-btn{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:20px;font-weight:600;cursor:pointer;font-family:Inter;font-size:12.5px;transition:all .2s}
+  .preset-btn{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:4px;font-weight:600;cursor:pointer;font-family:Inter;font-size:12px;transition:all .2s}
   .preset-btn:hover{border-color:var(--teal);color:var(--teal)}
   .preset-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
-  .warning-box{background:#fff8f0;border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:16px;color:#7a531e}
+  .warning-box{background:#fff8f0;border-left:3px solid var(--amber);border-radius:0 4px 4px 0;padding:10px 14px;font-size:12.5px;margin-top:16px;color:#7a531e}
   .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   .guide-col{border-right:1px solid var(--line);padding-right:16px}
   @media(max-width:860px){
@@ -108,7 +108,7 @@
   <!-- How to Read card -->
   <div class="card" style="margin-top: 24px;">
     <h3 style="font-size: 15px; color: var(--teal-d); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
-      📖 How to Read This Dashboard
+      How to Read This Dashboard
     </h3>
     <div class="grid4">
       <div style="font-size: 12.5px; line-height: 1.45;">
@@ -203,7 +203,7 @@
       <div class="grid3" style="gap: 20px;">
         <!-- Column 1: Absolute Top Targets -->
         <div class="guide-col">
-          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">🚨 Top Targets</h4>
+          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">Top Targets</h4>
           <div style="margin-bottom: 14px;">
             <strong style="font-size: 11px; color: var(--muted); display: block; margin-bottom: 2px;">Highest Need District:</strong>
             <div style="display: flex; align-items: baseline; gap: 8px; margin: 2px 0;">
@@ -224,7 +224,7 @@
 
         <!-- Column 2: Top by Operational Tier -->
         <div class="guide-col">
-          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">🎯 Top by Operational Tier</h4>
+          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">Top by Operational Tier</h4>
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; border-bottom: 1px dashed var(--line); padding-bottom: 6px;">
               <span><span class="pill High" style="margin-right: 6px; padding: 1px 6px; font-size: 10px;">High</span> <span id="tierTopHighName">-</span></span>
@@ -243,18 +243,18 @@
 
         <!-- Column 3: State Need Rankings -->
         <div>
-          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">🗺️ State Need Rankings</h4>
+          <h4 style="font-size: 12.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin: 0 0 12px;">State Need Rankings</h4>
           <div style="display: flex; flex-direction: column; gap: 8px;">
             <div>
-              <strong style="color: var(--high); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px;">🚨 High Need</strong>
+              <strong style="color: var(--high); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px;">High Need</strong>
               <div id="stateListHigh" style="display: flex; flex-direction: column; gap: 3px; font-size: 11.5px;">-</div>
             </div>
             <div>
-              <strong style="color: var(--amber); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; margin-top: 2px;">⚠️ Medium Need</strong>
+              <strong style="color: var(--amber); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; margin-top: 2px;">Medium Need</strong>
               <div id="stateListMed" style="display: flex; flex-direction: column; gap: 3px; font-size: 11.5px;">-</div>
             </div>
             <div>
-              <strong style="color: var(--low); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; margin-top: 2px;">✅ Lower Need</strong>
+              <strong style="color: var(--low); font-size: 11px; display: block; text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 3px; margin-top: 2px;">Lower Need</strong>
               <div id="stateListLow" style="display: flex; flex-direction: column; gap: 3px; font-size: 11.5px;">-</div>
             </div>
           </div>
@@ -279,7 +279,7 @@
           <th data-k="menstrual_hygiene" class="num">Menstr %</th>
           <th data-k="child_marriage" class="num">Marr %</th>
           <th data-k="child_stunting" class="num">Stunt %</th>
-          <th data-k="residual" class="num" title="Negative values indicate districts where menstrual hygiene use is lower than expected and may benefit from awareness campaigns.">Awareness Gap ⓘ</th>
+          <th data-k="residual" class="num" title="Negative values indicate districts where menstrual hygiene use is lower than expected and may benefit from awareness campaigns.">Awareness Gap</th>
         </tr></thead>
         <tbody></tbody>
       </table>
@@ -296,7 +296,7 @@
        leave-one-out cross-validation (trained on 49 districts, tested on the 1 held out, repeated 50×).</p>
     
     <div class="card" style="margin-top: 16px; margin-bottom: 16px; border-left: 4px solid var(--teal);">
-      <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 6px;">🏆 Best Model Selected</h3>
+      <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 6px;">Best Model Selected</h3>
       <div style="font-size: 19px; font-weight: 700; font-family: Poppins; color: var(--teal-d);">Ridge Regression</div>
       <p class="note" style="margin-top: 4px; margin-bottom: 0; line-height: 1.45;"><b>Reason:</b> Lowest RMSE (Root Mean Squared Error) of 8.9 during Leave-One-Out Cross Validation. We compared multiple models (Linear Regression, Ridge Regression, k-Nearest Neighbours, and Decision Tree) and dynamically selected the best-performing one to ensure predictions are robust and generalize well to unseen districts without overfitting.</p>
     </div>
@@ -316,11 +316,11 @@
     <div class="eyebrow">For NayePankh</div>
     <h2>How to use this</h2>
     <div class="grid3" style="margin-top:16px">
-      <div class="card"><h3 style="font-size:15.5px;color:var(--teal-d)">🎯 Target new districts</h3>
+      <div class="card"><h3 style="font-size:15.5px;color:var(--teal-d)">Target new districts</h3>
         <p class="note" id="useTop"></p></div>
-      <div class="card"><h3 style="font-size:15.5px;color:var(--teal-d)">🩸 Prioritise pad drives</h3>
+      <div class="card"><h3 style="font-size:15.5px;color:var(--teal-d)">Prioritize campaigns</h3>
         <p class="note" id="useGap"></p></div>
-      <div class="card"><h3 style="font-size:15.5px;color:var(--teal-d)">📊 Brief donors &amp; partners</h3>
+      <div class="card"><h3 style="font-size:15.5px;color:var(--teal-d)">Brief donors &amp; partners</h3>
         <p class="note">Share this link in grant applications and CSR pitches to show decisions are evidence-led —
            a strong differentiator for a youth-run NGO.</p></div>
     </div>
