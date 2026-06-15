@@ -72,9 +72,14 @@
   footer{background:var(--ink);color:#cfe0db;padding:26px 0;margin-top:50px;font-size:13px}
   footer a{color:#9fe0cf}
   .twocol{columns:2;column-gap:26px}
+  .preset-btn{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:6px 14px;border-radius:20px;font-weight:600;cursor:pointer;font-family:Inter;font-size:12.5px;transition:all .2s}
+  .preset-btn:hover{border-color:var(--teal);color:var(--teal)}
+  .preset-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .warning-box{background:#fff8f0;border-left:4px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 16px;font-size:13px;margin-top:16px;color:#7a531e}
+  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
   @media(max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}
-    .steps,.grid3{grid-template-columns:1fr}.hero h1{font-size:27px}.twocol{columns:1}
+    .steps,.grid3,.grid4{grid-template-columns:1fr !important}.hero h1{font-size:27px}.twocol{columns:1}
   }
 </style>
 </head>
@@ -97,6 +102,31 @@
 
 <div class="wrap">
   <div class="kpis" id="kpis"></div>
+
+  <!-- How to Read card -->
+  <div class="card" style="margin-top: 24px;">
+    <h3 style="font-size: 15px; color: var(--teal-d); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+      📖 How to Read This Dashboard
+    </h3>
+    <div class="grid4">
+      <div style="font-size: 12.5px; line-height: 1.45;">
+        <strong style="color: var(--teal-d); display: block; margin-bottom: 3px;">1. Need Index</strong>
+        Overall deprivation score (0–100) combining all 5 indicators. Higher = greater need.
+      </div>
+      <div style="font-size: 12.5px; line-height: 1.45;">
+        <strong style="color: var(--teal-d); display: block; margin-bottom: 3px;">2. Tier</strong>
+        High, Medium, or Lower priority waves determined by the k-means clustering model.
+      </div>
+      <div style="font-size: 12.5px; line-height: 1.45;">
+        <strong style="color: var(--teal-d); display: block; margin-bottom: 3px;">3. Awareness Gap</strong>
+        Menstrual hygiene performing worse than predicted. Negative values point to awareness/access barriers.
+      </div>
+      <div style="font-size: 12.5px; line-height: 1.45;">
+        <strong style="color: var(--teal-d); display: block; margin-bottom: 3px;">4. Campaign Presets</strong>
+        Pre-configured weight settings to immediately re-rank districts based on NayePankh's target intervention.
+      </div>
+    </div>
+  </div>
 
   <section>
     <div class="eyebrow">How it works</div>
@@ -138,13 +168,52 @@
 
   <section>
     <div class="eyebrow">Interactive · try it</div>
-    <h2>Re-weight the Need Index for your campaign</h2>
-    <p class="lead">Running a menstrual-hygiene drive? Slide that weight up and the ranking re-sorts live.
-       This lets NayePankh target the <i>same</i> data differently for each programme.</p>
+    <h2>Choose a Campaign Focus</h2>
+    <p class="lead">The rankings below update based on the type of intervention NayePankh plans to run.</p>
     <div class="card" style="margin-top:16px">
+      <div style="font-size:13px; font-weight:600; margin-bottom:10px; color:var(--teal-d); text-transform:uppercase; letter-spacing:0.04em">Quick Campaign Presets:</div>
+      <div class="presets" style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px" id="presets">
+        <button class="preset-btn active" data-preset="balanced" onclick="selectPreset('balanced')">Balanced View</button>
+        <button class="preset-btn" data-preset="education" onclick="selectPreset('education')">Education Drive</button>
+        <button class="preset-btn" data-preset="hygiene" onclick="selectPreset('hygiene')">Menstrual Hygiene Drive</button>
+        <button class="preset-btn" data-preset="sanitation" onclick="selectPreset('sanitation')">Sanitation Drive</button>
+        <button class="preset-btn" data-preset="nutrition" onclick="selectPreset('nutrition')">Nutrition Drive</button>
+      </div>
       <div class="controls" id="sliders"></div>
       <div class="formula" id="formula"></div>
     </div>
+
+    <div class="warning-box">
+      ⚠️ <b>Balanced View</b> should be used for overall district prioritization.<br>
+      Campaign-specific weights should only be used when planning a focused intervention such as menstrual hygiene, education, nutrition, or sanitation drives.
+    </div>
+
+    <!-- Recommended Actions section -->
+    <div style="margin-top: 36px; margin-bottom: 12px;">
+      <div class="eyebrow">Decision Guidance</div>
+      <h2>Recommended Actions</h2>
+      <p class="lead">High-priority targets automatically identified based on your current focus and filters.</p>
+    </div>
+    <div class="grid2" style="margin-bottom: 24px;">
+      <div class="card" style="border-left: 4px solid var(--high);">
+        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px;">🚨 Highest Need District</h3>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
+          <span id="recNeedName" style="font-size: 19px; font-weight: 700; font-family: Poppins;">-</span>
+          <span class="pill High" id="recNeedTier">-</span>
+        </div>
+        <div style="font-size: 13px; margin: 4px 0 8px;">Need Index: <b id="recNeedIndex">-</b></div>
+        <p class="note" id="recNeedReason" style="margin: 0; line-height: 1.45; font-size: 12.5px;">-</p>
+      </div>
+      <div class="card" style="border-left: 4px solid var(--amber);">
+        <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 8px;">🩸 Biggest Menstrual Hygiene Opportunity</h3>
+        <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
+          <span id="recGapName" style="font-size: 19px; font-weight: 700; font-family: Poppins;">-</span>
+        </div>
+        <div style="font-size: 13px; margin: 4px 0 8px;">Awareness Gap: <b id="recGapValue" style="color: var(--high);">-</b></div>
+        <p class="note" id="recGapReason" style="margin: 0; line-height: 1.45; font-size: 12.5px;">-</p>
+      </div>
+    </div>
+
     <div style="display:flex;gap:12px;align-items:center;margin:16px 0 8px;flex-wrap:wrap">
       <strong>District priority ranking</strong>
       <select id="stateFilter"><option value="">All states</option></select>
@@ -162,12 +231,12 @@
           <th data-k="menstrual_hygiene" class="num">Menstr %</th>
           <th data-k="child_marriage" class="num">Marr %</th>
           <th data-k="child_stunting" class="num">Stunt %</th>
-          <th data-k="residual" class="num">Access gap</th>
+          <th data-k="residual" class="num" title="Negative values indicate districts where menstrual hygiene use is lower than expected and may benefit from awareness campaigns.">Awareness Gap ⓘ</th>
         </tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <p class="note" style="margin-top:8px">“Access gap” = actual menstrual-hygiene use minus what the model predicts
+    <p class="note" style="margin-top:8px">“Awareness Gap” = actual menstrual-hygiene use minus what the model predicts
        from the district's profile. <span class="gap-neg">Red (negative)</span> = worse than expected → a likely
        awareness/access problem NayePankh can address directly.</p>
   </section>
@@ -176,9 +245,15 @@
     <div class="eyebrow">Model comparison</div>
     <h2>Four models, tested fairly — the best one wins</h2>
     <p class="lead">Each model predicts a district's menstrual-hygiene use from its other indicators, scored with
-       leave-one-out cross-validation (trained on 49 districts, tested on the 1 held out, repeated 50×). Higher
-       R² and lower error = better.</p>
-    <div class="grid2" style="margin-top:16px">
+       leave-one-out cross-validation (trained on 49 districts, tested on the 1 held out, repeated 50×).</p>
+    
+    <div class="card" style="margin-top: 16px; margin-bottom: 16px; border-left: 4px solid var(--teal);">
+      <h3 style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 6px;">🏆 Best Model Selected</h3>
+      <div style="font-size: 19px; font-weight: 700; font-family: Poppins; color: var(--teal-d);">Ridge Regression</div>
+      <p class="note" style="margin-top: 4px; margin-bottom: 0; line-height: 1.45;"><b>Reason:</b> Lowest RMSE (Root Mean Squared Error) of 8.9 during Leave-One-Out Cross Validation. We compared multiple models (Linear Regression, Ridge Regression, k-Nearest Neighbours, and Decision Tree) and dynamically selected the best-performing one to ensure predictions are robust and generalize well to unseen districts without overfitting.</p>
+    </div>
+
+    <div class="grid2">
       <div class="card"><div class="chartbox"><canvas id="models"></canvas></div>
         <p class="note">R² = share of variation explained (1.0 is perfect). The winner is highlighted.</p></div>
       <div class="card">
@@ -267,6 +342,87 @@ function recompute(){
   renderTable();
 }
 
+/* ---------- presets ---------- */
+const presets = {
+  balanced: {female_literacy: 20, menstrual_hygiene: 20, sanitation: 20, child_marriage: 20, child_stunting: 20},
+  education: {female_literacy: 60, menstrual_hygiene: 10, sanitation: 10, child_marriage: 10, child_stunting: 10},
+  hygiene: {female_literacy: 10, menstrual_hygiene: 60, sanitation: 10, child_marriage: 10, child_stunting: 10},
+  sanitation: {female_literacy: 10, menstrual_hygiene: 10, sanitation: 60, child_marriage: 10, child_stunting: 10},
+  nutrition: {female_literacy: 10, menstrual_hygiene: 10, sanitation: 10, child_marriage: 10, child_stunting: 60}
+};
+
+function selectPreset(name){
+  weights = {...presets[name]};
+  INDS.forEach(k=>{
+    const inp = document.querySelector(`#sliders input[data-k="${k}"]`);
+    if(inp) inp.value = weights[k];
+    const span = document.getElementById("w_"+k);
+    if(span) span.textContent = weights[k];
+  });
+  document.querySelectorAll('#presets .preset-btn').forEach(btn=>{
+    btn.classList.toggle('active', btn.dataset.preset === name);
+  });
+  recompute();
+}
+
+/* ---------- dynamic reasoning helpers ---------- */
+function getReasonText(depObj) {
+  const items = [];
+  if (depObj.female_literacy >= 50) items.push("low literacy");
+  if (depObj.sanitation >= 50) items.push("poor sanitation");
+  if (depObj.child_marriage >= 50) items.push("high child marriage");
+  if (depObj.child_stunting >= 50) items.push("high stunting");
+  if (depObj.menstrual_hygiene >= 50) items.push("poor menstrual hygiene use");
+  
+  if (items.length === 0) {
+    const key = Object.keys(depObj).reduce((a, b) => depObj[a] > depObj[b] ? a : b);
+    const labelMap = {
+      female_literacy: "literacy challenges",
+      sanitation: "sanitation deficits",
+      child_marriage: "child marriage issues",
+      child_stunting: "nutritional stunting",
+      menstrual_hygiene: "menstrual hygiene barriers"
+    };
+    return "Moderate challenges driven by " + labelMap[key] + ".";
+  }
+  
+  if (items.length === 1) return items[0].charAt(0).toUpperCase() + items[0].slice(1) + ".";
+  if (items.length === 2) return items[0].charAt(0).toUpperCase() + items[0].slice(1) + " and " + items[1] + ".";
+  return items[0].charAt(0).toUpperCase() + items[0].slice(1) + ", " + items.slice(1, -1).join(", ") + " and " + items[items.length - 1] + ".";
+}
+
+function updateRecommended(rows) {
+  if (!rows || rows.length === 0) {
+    document.getElementById("recNeedName").textContent = "-";
+    document.getElementById("recNeedTier").style.display = "none";
+    document.getElementById("recNeedIndex").textContent = "-";
+    document.getElementById("recNeedReason").textContent = "No data available.";
+    document.getElementById("recGapName").textContent = "-";
+    document.getElementById("recGapValue").textContent = "-";
+    document.getElementById("recGapReason").textContent = "No data available.";
+    return;
+  }
+  
+  // 1. Highest Need
+  const topNeed = rows[0];
+  document.getElementById("recNeedName").textContent = `${topNeed.district} (${topNeed.state})`;
+  const tier = TIERKEY(topNeed.tier);
+  const tierEl = document.getElementById("recNeedTier");
+  tierEl.style.display = "inline-block";
+  tierEl.className = `pill ${tier}`;
+  tierEl.textContent = tier;
+  document.getElementById("recNeedIndex").textContent = topNeed.liveNeed.toFixed(1);
+  document.getElementById("recNeedReason").textContent = getReasonText(topNeed.dep);
+  
+  // 2. Biggest Opportunity
+  const opps = [...rows].sort((a, b) => a.residual - b.residual);
+  const topOpp = opps[0];
+  document.getElementById("recGapName").textContent = `${topOpp.district} (${topOpp.state})`;
+  document.getElementById("recGapValue").textContent = topOpp.residual.toFixed(1);
+  document.getElementById("recGapReason").textContent = 
+    `Menstrual hygiene use (${topOpp.menstrual_hygiene}%) is significantly lower than predicted (${topOpp.predicted_menstrual}%) based on socio-economic indicators.`;
+}
+
 /* ---------- sliders ---------- */
 function renderSliders(){
   document.getElementById("sliders").innerHTML = INDS.map(k=>
@@ -275,7 +431,9 @@ function renderSliders(){
   document.querySelectorAll('#sliders input').forEach(inp=>{
     inp.addEventListener('input',e=>{
       const k=e.target.dataset.k; weights[k]=+e.target.value;
-      document.getElementById("w_"+k).textContent=e.target.value; recompute();
+      document.getElementById("w_"+k).textContent=e.target.value;
+      document.querySelectorAll('#presets .preset-btn').forEach(btn=>btn.classList.remove('active'));
+      recompute();
     });
   });
 }
@@ -306,6 +464,8 @@ function renderTable(){
       <td class="num">${d.child_stunting}</td>
       <td class="num ${gcls}">${gap>0?"+":""}${gap}</td>
     </tr>`;}).join("");
+  
+  updateRecommended(rows);
 }
 function setupTableUI(){
   document.querySelectorAll("#tbl th").forEach(th=>th.addEventListener("click",()=>{
